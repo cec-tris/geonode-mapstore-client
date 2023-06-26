@@ -116,6 +116,12 @@
         const geoServerPublicLocation = '{{ GEOSERVER_PUBLIC_LOCATION }}' || '';
         const isMobile = '{{ request.user_agent.is_mobile }}' === 'True' ? true : false;
 
+        //TODO [chumano]: set isProd=false to run on local 
+        const isProd = true;
+        const proxyUrl = isProd ?{
+            url: '{{UPDATED_PROXY_URL|safe }}',
+            useCORS: []
+        }: undefined;
         window.__GEONODE_CONFIG__ = {
             languageCode: '{{ LANGUAGE_CODE }}',
             languages: languages,
@@ -126,11 +132,9 @@
             pluginsConfigKey: pluginsConfigKey,
             pluginsConfigPatchRules: pluginsConfigPatchRules,
             apikey: '{%if user_apikey %}{{user_apikey}}{% else %}{% endif %}',
+            baseIconsUrl: '{{ SITEURL }}' || 'http://localhost',
             localConfig: {
-                proxyUrl: {
-                    url: '{{UPDATED_PROXY_URL|safe }}',
-                    useCORS: []
-                },
+                proxyUrl: proxyUrl,
                 useAuthenticationRules: true,
                 authenticationRules: [
                     {

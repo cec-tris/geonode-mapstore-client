@@ -28,10 +28,8 @@ module.exports = (devServerDefault, projectConfig) => {
             const hashRegex = /\.[a-zA-Z0-9]{1,}\.js/;
             app.use(function(req, res, next) {
                 // remove hash from requests to use the local js
-                const appsName = [
-                    ...(projectConfig.apps || [])
-                ]
-                    .find(name => req.url.indexOf('/' + name) !== -1 );
+                const apps = projectConfig.apps || []
+                const appsName = Object.keys(apps).find(name => req.url.indexOf('/' + name) !== -1 );
                 if (appsName) {
                     req.url = req.url.replace(hashRegex, '.js');
                     req.path = req.path.replace(hashRegex, '.js');

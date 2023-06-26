@@ -156,3 +156,61 @@
 .ms-style-editor-toolbar-left > * + * {
     margin-left: 4px;
 }
+
+
+// icon select modal
+.icons-select-modal-body{
+    overflow-y:hidden !important;
+}
+.icons-select-panel{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+    height: 100%;
+    .search-container{
+        display: flex;
+        align-items: center;
+        position: relative;
+        input{
+            padding-right: 26px;
+        }
+        button{
+            position: absolute;
+            right: 2px
+        }
+    }
+    .icons-list{
+        flex: 1;
+        padding: 0;
+        margin: 5px 10px;
+        overflow-y: auto;
+        li{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            border: 1px solid;
+            border-radius: 5px;
+
+            span{
+                margin-left: 0.5rem;
+            }
+
+            &.selected{
+                span{
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+#gn-components-theme(@theme-vars) {
+    .icons-select-panel{
+        .icons-list{
+            li{
+                .border-color-var(@theme-vars[main-border-color]);
+            }
+        }
+    }
+}

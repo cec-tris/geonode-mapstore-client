@@ -36,6 +36,8 @@ import { setViewer } from '@mapstore/framework/utils/MapInfoUtils';
 import { setObservableConfig } from 'recompose';
 import rxjsConfig from 'recompose/rxjsObservableConfig';
 import { getGeoNodeConfig, getGeoNodeLocalConfig } from "@js/utils/APIUtils";
+import {initAppCustom} from '@js/utils/CustomUtils'
+
 setObservableConfig(rxjsConfig);
 
 let actionListeners = {};
@@ -65,7 +67,7 @@ export function getVersion() {
 }
 
 export function initializeApp() {
-
+    initAppCustom();
     // Set X-CSRFToken in axios;
     axios.defaults.xsrfHeaderName = "X-CSRFToken";
     axios.defaults.xsrfCookieName = "csrftoken";
