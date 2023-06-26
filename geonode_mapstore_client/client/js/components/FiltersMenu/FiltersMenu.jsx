@@ -29,6 +29,7 @@ const FiltersMenu = forwardRef(({
     defaultLabelId,
     totalResources,
     totalFilters,
+    filtersActive,
     loading,
     hideCardLayoutButton,
     cardLayoutStyle,
@@ -50,6 +51,8 @@ const FiltersMenu = forwardRef(({
             <div className="gn-menu-container">
                 <div className="gn-menu-content">
                     <div className="gn-menu-fill">
+                    {filtersActive &&
+                        <>
                         {totalFilters > 0 ? <ButtonWithTooltip
                             variant="primary"
                             size="sm"
@@ -69,6 +72,9 @@ const FiltersMenu = forwardRef(({
                         {loading ? <span className="resources-count-loading"><Spinner /></span> : <Badge>
                             <span className="resources-count"> <Message msgId="gnhome.resourcesFound" msgParams={{ count: totalResources }}/> </span>
                         </Badge>}
+                        
+                        </>
+                    }
                     </div>
                     <Menu
                         items={cardsMenu}

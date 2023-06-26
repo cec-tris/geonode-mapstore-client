@@ -42,9 +42,11 @@
                 {% endblock %}
             </div>
             <div class="gn-menu-content-center">
-                {% block center_menu %}
-                    {% include './search_bar.html' with search_bar_id='gn-search-bar' %}
-                {% endblock %}
+                {% if not show_search_bar and show_search_bar != False or show_search_bar == True %}
+                    {% block center_menu %}
+                        {% include './search_bar.html' with search_bar_id='gn-search-bar' %}
+                    {% endblock %}
+                {% endif %}
             </div>
             <div class="gn-menu-content-right">
                 {% block right_menu %}
@@ -59,9 +61,11 @@
     </div>
 </nav>
 <div id="{{ id|default:'' }}-bottom">
-    {% block bottom_menu %}
-        {% include './search_bar.html' with search_bar_id='gn-search-bar-bottom' %}
-    {% endblock %}
+    {% if not show_search_bar and show_search_bar != False or show_search_bar == True %}
+        {% block bottom_menu %}
+            {% include './search_bar.html' with search_bar_id='gn-search-bar-bottom' %}
+        {% endblock %}
+    {% endif %}
 </div>
 {% block extra_script %}
     <script type="text/javascript">
@@ -75,7 +79,9 @@
                     else {
                         var href = signInElement.getAttribute("href").split("next=")[0];
                         var url_parts = window.location.href.split(window.location.pathname);
-                        var path_name = encodeURIComponent(window.location.pathname + url_parts[url_parts.length-1]);
+                        //[chumano]: set default next-url after logined
+                        //var path_name = encodeURIComponent(window.location.pathname + url_parts[url_parts.length-1]);
+                        var path_name = encodeURIComponent("/catalogue/#/?f=dashboard");
                         signInElement.setAttribute("href", href.concat("next=".concat(path_name)));
                     }
                 }

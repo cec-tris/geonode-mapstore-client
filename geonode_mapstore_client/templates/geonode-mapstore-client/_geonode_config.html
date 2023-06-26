@@ -117,7 +117,7 @@
         const isMobile = '{{ request.user_agent.is_mobile }}' === 'True' ? true : false;
 
         //TODO [chumano]: set isProd=false to run on local 
-        const isProd = true;
+        const isProd = siteUrl != 'http://localhost/';
         const proxyUrl = isProd ?{
             url: '{{UPDATED_PROXY_URL|safe }}',
             useCORS: []
@@ -132,7 +132,7 @@
             pluginsConfigKey: pluginsConfigKey,
             pluginsConfigPatchRules: pluginsConfigPatchRules,
             apikey: '{%if user_apikey %}{{user_apikey}}{% else %}{% endif %}',
-            baseIconsUrl: '{{ SITEURL }}' || 'http://localhost',
+            baseIconsUrl: '{{ SITEURL }}' || 'http://localhost/',
             localConfig: {
                 proxyUrl: proxyUrl,
                 useAuthenticationRules: true,

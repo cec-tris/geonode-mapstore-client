@@ -25,23 +25,32 @@ def _is_mobile_device(context):
 def get_base_left_topbar_menu(context):
 
     is_mobile = _is_mobile_device(context)
-
+    # TODO [chumano]: need to use multi-lang
+    user = context.get('request').user
+    if not user.is_authenticated:
+        return [
+            {
+                "type": "link",
+                "href": "/",
+                "label": "Bản đồ"
+            },
+            {
+                "type": "link",
+                "href": "/catalogue/#/search/?f=geostory",
+                "label": "Thông tin giao thông"
+            },
+        ]
+    
     return [
         {
-            "label": "Data",
-            "type": "dropdown",
-            "items": [
-                {
-                    "type": "link",
-                    "href": "/catalogue/#/search/?f=dataset",
-                    "label": "Datasets"
-                },
-                {
-                    "type": "link",
-                    "href": "/catalogue/#/search/?f=document",
-                    "label": "Documents"
-                } if not is_mobile else None
-            ]
+            "type": "link",
+            "href": "/catalogue/#/search/?f=dashboard",
+            "label": "Dashboards"
+        },
+        {
+            "type": "link",
+            "href": "/catalogue/#/search/?f=featured",
+            "label": "Featured"
         },
         {
             "type": "link",
@@ -53,16 +62,33 @@ def get_base_left_topbar_menu(context):
             "href": "/catalogue/#/search/?f=geostory",
             "label": "GeoStories"
         },
-        {
+         {
             "type": "link",
-            "href": "/catalogue/#/search/?f=dashboard",
-            "label": "Dashboards"
+            "href": "/catalogue/#/search/?f=dataset",
+            "label": "Datasets"
         },
         {
             "type": "link",
-            "href": "/catalogue/#/search/?f=featured",
-            "label": "Featured"
-        }
+            "href": "/catalogue/#/search/?f=document",
+            "label": "Documents"
+        },
+        # {
+        #     "label": "Data",
+        #     "type": "dropdown",
+        #     "items": [
+        #         {
+        #             "type": "link",
+        #             "href": "/catalogue/#/search/?f=dataset",
+        #             "label": "Datasets"
+        #         },
+        #         {
+        #             "type": "link",
+        #             "href": "/catalogue/#/search/?f=document",
+        #             "label": "Documents"
+        #         } if not is_mobile else None
+        #     ]
+        # }
+       
     ]
 
 
@@ -117,7 +143,12 @@ def get_base_right_topbar_menu(context):
                 "label": "Create group"
             }if user.is_superuser else None,
         ])
-    return [home, about]
+
+    # return [home, about]
+    right_menu =[] #home
+    if user.is_authenticated:
+        right_menu.extend([about])
+    return right_menu
 
 
 @register.simple_tag(takes_context=True)

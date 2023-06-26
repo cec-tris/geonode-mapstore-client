@@ -94,6 +94,10 @@
         "es": {
             "code": "es-ES",
             "description": "Español"
+        },
+        "vi": {
+            "code": "vi-VN",
+            "description": "Tiếng việt"
         }
     },
     "plugins": {
@@ -3245,6 +3249,8 @@
                     "containerSelector": "#gn-catalogue",
                     "scrollContainerSelector": "#gn-catalogue",
                     "enableGeoNodeCardsMenuItems": true,
+                    "disableFilters": "{!state('user')}",
+                    "disableDetailPanel": "{!state('user')}",
                     "detailsTabs": [
                         {
                             "type": "tab",

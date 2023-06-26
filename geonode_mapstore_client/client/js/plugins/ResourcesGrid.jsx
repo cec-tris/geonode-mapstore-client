@@ -697,6 +697,8 @@ function ResourcesGrid({
         </div>
     );
 
+    //[chumano] : disableFilters
+    const filtersActive = !disableFilters && !!(queryFilters.length > 0)
     return (
         <>
             <Portal targetSelector={targetSelector}>
@@ -727,7 +729,7 @@ function ResourcesGrid({
                                         defaultLabelId={parsedConfig.order?.defaultLabelId}
                                         totalResources={totalResources}
                                         totalFilters={queryFilters.length}
-                                        filtersActive={!!(queryFilters.length > 0)}
+                                        filtersActive={filtersActive}
                                         loading={loading}
                                         cardLayoutStyle={cardLayoutStyleState}
                                         setCardLayoutStyle={setCardLayoutStyle}

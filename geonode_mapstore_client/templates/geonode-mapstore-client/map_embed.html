@@ -26,6 +26,141 @@
         <div class="gn-page-wrapper {% if request.user_agent.is_mobile %}gn-mobile{% else %}gn-desktop{% endif %}">
             {% block gn_config %}
                 {% include './_geonode_config.html' with plugins_config_key='map_embed' is_embed='true' %}
+
+                {% block override_local_config %}
+                <script>
+                    window.__GEONODE_CONFIG__.overrideLocalConfig = function(localConfig, _) {
+                        /* [chumano]
+                        _ is a subset of lodash and contains following functions
+                        {
+                            mergeWith,
+                            merge,
+                            isArray,
+                            isString,
+                            isObject,
+                            castArray,
+                            get
+                        }
+                        */
+                        var rs = _.mergeWith(localConfig, {
+                            // ...my override config
+                            plugins: {
+                                "map_embed": [
+                                        {
+                                            "name": "Map",
+                                            "cfg": {
+                                                "shouldLoadFont": false,
+                                                "tools": [],
+                                                "mapOptions": {
+                                                    "openlayers": {
+                                                        "attribution": {
+                                                            "container": "#footer-attribution-container"
+                                                        },
+                                                        "interactions": {
+                                                            "pinchRotate": false,
+                                                            "altShiftDragRotate": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "name": "Identify",
+                                            "cfg": {
+                                                "viewerOptions": {
+                                                    "container": "{context.ReactSwipe}"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "name": "Toolbar",
+                                            "id": "NavigationBar",
+                                            "cfg": {
+                                                "id": "navigationBar",
+                                                "layout": "horizontal"
+                                            }
+                                        },
+                                        {
+                                            "name": "MapLoading",
+                                            "override": {
+                                                "Toolbar": {
+                                                    "alwaysVisible": true
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "name": "ZoomAll",
+                                            "override": {
+                                                "Toolbar": {
+                                                    "alwaysVisible": false
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "name": "ZoomIn",
+                                            "override": {
+                                                "Toolbar": {
+                                                    "alwaysVisible": true
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "name": "ZoomOut",
+                                            "override": {
+                                                "Toolbar": {
+                                                    "alwaysVisible": true
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "name": "TOC",
+                                            "cfg": {
+                                                "activateQueryTool": false,
+                                                "activateAddLayerButton": false,
+                                                "activateMetedataTool": false,
+                                                "activateSettingsTool": false,
+                                                "activateRemoveLayer": false,
+                                                "activateRemoveGroup": false,
+                                                "activateFilterLayer": false,
+
+                                                "activateSortLayer": false,
+                                            }
+                                        },
+                                        {
+                                            "name": "DrawerMenu",
+                                            "cfg": {
+                                                "menuOptions": {
+                                                    "width": 350
+                                                }
+                                            }
+                                        },
+                                        // {
+                                        //     "name": "Expander"
+                                        // },
+                                        // {
+                                        //     "name": "MapFooter"
+                                        // },
+                                        // {
+                                        //     "name": "Swipe"
+                                        // },
+                                    ],
+                            }
+                        }, function(objValue, srcValue, key) {
+                            if (_.isArray(objValue)) {
+                                return srcValue;
+                            }
+                            // supportedLocales is an object so it's merged with the default one
+                            // so to remove the default languages we should take only the supportedLocales from override
+                            if (key === 'supportedLocales') {
+                                return srcValue;
+                            }
+                        });
+
+                        return rs;
+                    };
+                </script>
+                {% endblock %}
+
             {% endblock %}
             <div class="gn-embed gn-theme">
                 {% block container %}

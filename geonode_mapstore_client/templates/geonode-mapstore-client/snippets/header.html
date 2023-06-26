@@ -1,13 +1,13 @@
 {% load static %}
 <header class="gn-main-header">
-    {% include './brand_navbar.html'  with id='gn-brand-navbar' %}
+    {% include './brand_navbar.html'  with id='gn-brand-navbar' show_search_bar=show_search_bar%}
 </header>
 <div class="gn-main-header-placeholder"></div>
 {% if show_hero %}
     {% include './hero.html' %}
 {% endif %}
 
-{% include './topbar.html' with id='gn-topbar' %}
+{% include './topbar.html' with id='gn-topbar' home_page=home_page%}
 
 <script>
     (function () {

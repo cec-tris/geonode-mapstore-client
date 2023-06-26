@@ -63,7 +63,7 @@ def run_setup_hooks(*args, **kwargs):
         pass
 
     urlpatterns += [
-        url(r'^catalogue/', TemplateView.as_view(template_name='geonode-mapstore-client/catalogue.html')),
+        url(r'^catalogue/', TemplateView.as_view(template_name='geonode-mapstore-client/catalogue.html'), name="catalogue"),
         # required, otherwise will raise no-lookup errors to be analysed
         url(r'^api/v2/', include(router.urls)),
     ]

@@ -61,6 +61,16 @@
                     <script type="text/javascript">
                         // enable dropdown functionalities
                         $('.dropdown-toggle').dropdown();
+
+                        // [chumano]: ignore "Warning: Failed prop type"
+                        const homepageErrors = console.error.bind(console)
+                        console.error = function(errormessage) {
+                            const suppressedErrors = errormessage
+                            .toString()
+                            .includes("Warning: Failed prop type:");
+                            
+                            !suppressedErrors && homepageErrors(errormessage)
+                        }
                     </script>
                 {% endblock %}
             </div>
