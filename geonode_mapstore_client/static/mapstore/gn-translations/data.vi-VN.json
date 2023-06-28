@@ -2,7 +2,7 @@
     "locale": "vi-VN",
     "messages": {
         "geostory": {
-            "geoNode": "GeoNode"
+            "geoNode": "MapHub"
         },
         "mediaEditor": {
             "imageList": {
@@ -16,7 +16,7 @@
             }
         },
         "gnhome": {
-            "description": "<h1>GeoNode</h1><p>sharing geospatial data and maps.</p>",
+            "description": "<h1>MapHub</h1><p>sharing geospatial data and maps.</p>",
             "orderBy": "Order by",
             "mostRecent": "Most recent",
             "lessRecent": "Less recent",
@@ -55,9 +55,9 @@
             "creation": "Creation",
             "category": "Category",
             "categories": "Categories",
-            "noPublicContentTitle": "Welcome to GeoNode",
+            "noPublicContentTitle": "Welcome to MapHub",
             "noPublicContentContent": "This catalog doesn’t have public resources. <br/> Please <a href=\"/account/signup/?next=/\">register</a> or <a href=\"/account/login/?next=/\">sign in</a> to browse the contents.",
-            "noContentYetTitle": "Welcome to GeoNode",
+            "noContentYetTitle": "Welcome to MapHub",
             "noContentYetContent": "This catalog doesn’t have published contents yet. <br/> We’re working to populate it with great resources. <br/><br/>Stay tuned!",
             "errorResourcePageTitle": "Page Loading Error",
             "errorResourcePageContent": "The selected resources page is not available",
