@@ -123,6 +123,7 @@ def get_base_right_topbar_menu(context):
             ]
         }
     if user.is_authenticated and not Configuration.load().read_only:
+        invitations_enabled = settings.INVITATIONS_ENABLED
         about['items'].extend([
             {
                 "type": "divider"
@@ -131,7 +132,7 @@ def get_base_right_topbar_menu(context):
                 "type": "link",
                 "href": "/invitations/geonode-send-invite/",
                 "label": "Invite users"
-            },
+            } if invitations_enabled else None,
             {
                 "type": "link",
                 "href": "/admin/people/profile/add/",
