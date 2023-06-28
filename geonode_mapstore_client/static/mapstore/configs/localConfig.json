@@ -615,11 +615,13 @@
                                 },
                                 {
                                     "type": "plugin",
-                                    "name": "IsoDownload"
+                                    "name": "IsoDownload",
+                                    "disableIf": true
                                 },
                                 {
                                     "type": "plugin",
-                                    "name": "DublinCoreDownload"
+                                    "name": "DublinCoreDownload",
+                                    "disableIf": true
                                 }
                             ]
                         },
@@ -964,10 +966,16 @@
                 "name": "Playback"
             },
             {
-                "name": "IsoDownload"
+                "name": "IsoDownload",
+                "cfg": {
+                    "disablePluginIf": true
+                }
             },
             {
-                "name": "DublinCoreDownload"
+                "name": "DublinCoreDownload",
+                "cfg": {
+                    "disablePluginIf": true
+                }
             },
             {
                 "name": "LayerDownload",

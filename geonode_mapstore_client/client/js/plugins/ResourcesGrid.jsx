@@ -293,7 +293,8 @@ function ResourcesGrid({
                     labelId: 'gnhome.remoteServices',
                     value: 'remote',
                     type: 'link',
-                    href: '/services/?limit=5'
+                    href: '/services/?limit=5',
+                    disableIf: "{state('user').is_superuser ? false : true}"
                 }
             ]
         },

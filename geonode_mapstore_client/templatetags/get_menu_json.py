@@ -229,36 +229,38 @@ def get_user_menu(context):
             devider,
         ]
     }
+    # [chumano] hide help link
     general = [
-        {
-            "type": "link",
-            "href": "/help/",
-            "label": "Help"
-        },
-        devider,
+        # {
+        #     "type": "link",
+        #     "href": "/help/",
+        #     "label": "Help"
+        # },
+        # devider,
         logout
     ]
     monitoring = []
     if settings.MONITORING_ENABLED:
         monitoring = [
-            devider,
+            # devider,
             {
                 "type": "link",
                 "href": "/monitoring/",
                 "label": "Monitoring & Analytics"
             }
         ]
+    # [chumano] hide admin,geoserver  link
     admin_only = [
-        {
-            "type": "link",
-            "href": "/admin/",
-            "label": "Admin"
-        },
-        {
-            "type": "link",
-            "href": "/geoserver/",
-            "label": "GeoServer"
-        }
+        # {
+        #     "type": "link",
+        #     "href": "/admin/",
+        #     "label": "Admin"
+        # },
+        # {
+        #     "type": "link",
+        #     "href": "/geoserver/",
+        #     "label": "GeoServer"
+        # }
     ] + monitoring + [devider] + general
 
     if user.is_superuser:
