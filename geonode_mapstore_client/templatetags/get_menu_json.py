@@ -37,7 +37,7 @@ def get_base_left_topbar_menu(context):
             {
                 "type": "link",
                 "href": "/catalogue/#/search/?f=geostory",
-                "label": "Thông tin giao thông"
+                "label": "Thông tin"
             },
         ]
     

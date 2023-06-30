@@ -18,6 +18,5 @@ function getIcons(search, page=1, limit = 10){
 }
 
 export function initAppCustom(){
-    console.log('initAppCustom...')
     API.Utils.setService("getIcons", getIcons)
 }
