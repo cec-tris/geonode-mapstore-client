@@ -16,8 +16,8 @@ import { getGeoNodeLocalConfig, parseDevHostname } from "@js/utils/APIUtils";
 
 export const getUserInfo = (apikey) => {
     const endpointV1 = getGeoNodeLocalConfig('geoNodeApi.endpointV1', '/api');
-    const url = parseDevHostname(`${endpointV1}/o/v4/userinfo`)
-    return axios.get(url, {
+
+    return axios.get(`${parseDevHostname(endpointV1)}/o/v4/userinfo`, {
         params: {
             ...(apikey && { apikey })
         }
