@@ -62,6 +62,10 @@ const toModulePlugin = (...args) => {
 };
 
 export const plugins = {
+    GlobeViewSwitcherPlugin: toModulePlugin(
+        'GlobeViewSwitcher',
+        () => import(/* webpackChunkName: 'plugins/globe-view-switcher' */ '@mapstore/framework/plugins/GlobeViewSwitcher')
+    ),
     LayerDownloadPlugin: toModulePlugin(
         'LayerDownload',
         () => import(/* webpackChunkName: 'plugins/layer-download' */ '@mapstore/framework/plugins/LayerDownload'),

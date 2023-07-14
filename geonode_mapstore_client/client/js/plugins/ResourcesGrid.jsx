@@ -294,7 +294,7 @@ function ResourcesGrid({
                     value: 'remote',
                     type: 'link',
                     href: '/services/?limit=5',
-                    disableIf: "{state('user').is_superuser ? false : true}"
+                    disableIf: "{(state('user') && state('user').is_superuser) ? false : true}"
                 }
             ]
         },
@@ -699,7 +699,7 @@ function ResourcesGrid({
     );
 
     //[chumano] : disableFilters
-    const filtersActive = !disableFilters && !!(queryFilters.length > 0)
+    const filtersActive = !disableFilters;// && (!!(queryFilters.length > 0) || user )
     return (
         <>
             <Portal targetSelector={targetSelector}>

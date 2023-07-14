@@ -5,9 +5,9 @@ function getIcons(search, page=1, limit = 10){
     if(!search){
         search =''
     }
-    const geoNodePageConfig = window.__GEONODE_CONFIG__ //||  {baseIconsUrl:'http://192.168.1.30:8003/' };
-    const {baseIconsUrl} = geoNodePageConfig;
-    const url = `${baseIconsUrl}icons/?format=json&search=${search}&page=${page}&limit=${limit}`
+    const geoNodePageConfig = window.__GEONODE_CONFIG__ //||  {baseUrl:'http://192.168.1.30:8003/' };
+    const {baseUrl} = geoNodePageConfig;
+    const url = `${baseUrl}icons/?format=json&search=${search}&page=${page}&limit=${limit}`
     return axios.get(url, {
         headers: {
             'Content-Type': "application/json"
@@ -16,7 +16,30 @@ function getIcons(search, page=1, limit = 10){
         return response.data;
     });
 }
+function wait(milliseconds){
+    return new Promise(resolve => {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+async function getExternalData(dataId){
+    const geoNodePageConfig = window.__GEONODE_CONFIG__ //||  {baseUrl:'http://192.168.1.30:8003/' };
+    const {baseUrl} = geoNodePageConfig;
+    const url = `${baseUrl}datahub/data/${dataId}`
+    await wait(1000)
+    return axios.get(url, {
+        headers: {
+            'Content-Type': "application/json"
+        }
+    }).then(function(response) {
+        console.log("chumano getExternalData", response)
+        const responseData = response.data;
+        return responseData;
+    });
+    
+}
 
 export function initAppCustom(){
-    API.Utils.setService("getIcons", getIcons)
+    API.Utils.setService("GET_ICONS_API", getIcons)
+    API.Utils.setService("GET_EXTERNAL_DATA_API", getExternalData)
 }

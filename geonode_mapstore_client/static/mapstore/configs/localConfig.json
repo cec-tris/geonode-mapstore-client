@@ -822,6 +822,9 @@
                                 "pinchRotate": false,
                                 "altShiftDragRotate": false
                             }
+                        },
+                        "cesium":{
+                            "customCredit": "<a href=\"https://map.map4d.vn\" target=\"_blank\">IoT Link Map 4D</a>"
                         }
                     }
                 }
@@ -1160,6 +1163,9 @@
                 }
             },
             {
+                "name": "SearchServicesConfig"
+            },
+            {
                 "name": "FullScreen",
                 "override": {
                     "Toolbar": {
@@ -1178,6 +1184,14 @@
             },
             {
                 "name": "Legend"
+            },
+            {
+                "name" :"GlobeViewSwitcher",
+                "override": {
+                    "Toolbar": {
+                        "alwaysVisible": true
+                    }
+                }
             }
         ],
         "dataset_edit_data_viewer": [
@@ -3257,7 +3271,6 @@
                     "containerSelector": "#gn-catalogue",
                     "scrollContainerSelector": "#gn-catalogue",
                     "enableGeoNodeCardsMenuItems": true,
-                    "disableFilters": "{!state('user')}",
                     "disableDetailPanel": "{!state('user')}",
                     "detailsTabs": [
                         {
@@ -3386,7 +3399,24 @@
                             "labelId": "gnviewer.linkedResources",
                             "items": "{context.get(state('gnResourceData'), 'linkedResources')}"
                         }
-                    ]
+                    ],
+                    "extent": {
+                        "layers": [
+                            {
+                                "type": "tileprovider",
+                                "title": "IoT Link",
+                                "name": "iotlink",
+                                "provider": "custom",
+                                "url": "http://rtile.map4d.vn/all/2d/{z}/{x}/{y}.png",
+                                "thumbURL": "http://rtile.map4d.vn/all/2d/3/6/3.png",
+                                "group": "background",
+                                "visibility": true,
+                                "options": {
+                                    "attribution" : "IoT Link  | &copy; <a href=\"https://map.map4d.vn\">IoT Link Map 4D</a> "
+                                }
+                            }
+                        ]
+                    }
                 }
             },
             {
