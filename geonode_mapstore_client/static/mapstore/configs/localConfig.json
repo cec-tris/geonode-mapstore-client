@@ -1162,9 +1162,6 @@
                 }
             },
             {
-                "name": "SearchServicesConfig"
-            },
-            {
                 "name": "FullScreen",
                 "override": {
                     "Toolbar": {
@@ -2028,6 +2025,9 @@
                         "min-width: 768px"
                     ]
                 }
+            },
+            {
+                "name": "SearchServicesConfig"
             },
             {
                 "name": "FullScreen",
