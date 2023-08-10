@@ -1,4 +1,5 @@
 import axios from '@mapstore/framework/libs/ajax';
+import isEmpty from "lodash/isEmpty";
 
 /**
 * @module utils/FileUtils
@@ -26,6 +27,7 @@ export const imageExtensions = ['jpg', 'jpeg', 'png'];
 export const videoExtensions = ['mp4', 'mpg', 'avi', 'm4v', 'mp2', '3gp', 'flv', 'vdo', 'afl', 'mpga', 'webm'];
 export const gltfExtensions = ['glb', 'gltf'];
 export const pcdExtensions = ['pcd'];
+export const ifcExtensions = ['ifc'];
 
 /**
 * check if a resource extension is supported for display in the media viewer
@@ -38,6 +40,7 @@ export const determineResourceType = extension => {
     if (videoExtensions.includes(extension)) return 'video';
     if (gltfExtensions.includes(extension)) return 'gltf';
     if (pcdExtensions.includes(extension)) return 'pcd';
+    if (ifcExtensions.includes(extension)) return 'ifc';
     return 'unsupported';
 };
 
@@ -60,4 +63,22 @@ export const getFileType = (file) => {
         return 'json';
     }
     return type;
+};
+
+/**
+ * Get file name and extension parts from the valid url string
+ * @param {string} url
+ * @return {Object} name and extension object
+ */
+export const getFileNameAndExtensionFromUrl = (url) => {
+    let fileName = '';
+    let ext = '';
+    if (isEmpty(url)) {
+        return { fileName, ext };
+    }
+    const parsedName = url?.split('?')?.[0]?.split('#')?.[0]?.split('/')?.pop();
+    const period = parsedName?.lastIndexOf('.');
+    fileName = period !== -1 ? parsedName.substring(0, period) : parsedName;
+    ext = period !== -1 ? parsedName.substring(period + 1) : "";
+    return { fileName, ext: !isEmpty(ext) ? "." + ext : ext };
 };
