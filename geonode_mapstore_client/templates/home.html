@@ -1,5 +1,8 @@
 {% load static %}
 {% load client_version %}
+{% load default_home_page %}
+{% get_default_home_page as DEFAULT_PAGE %}
+
 <!DOCTYPE html>
 <html class="msgapi">
     <head>
@@ -26,7 +29,13 @@
     
                 {% block content %}
                     <div id="ms-container">
-                        <iframe src="http://localhost/maps/69/embed#/" width="100%" height="100%"></iframe>
+                        {% comment %} <iframe src="{{DEFAULT_PAGE}}" width="100%" height="100%"></iframe> {% endcomment %}
+                        {% if DEFAULT_PAGE %}
+                        <iframe src="{{DEFAULT_PAGE}}" width="100%" height="100%"></iframe>
+                        {% else %}
+                            Giới thiệu MapHub
+                        {% endif %}
+                        
                     </div>
                 {% endblock %}
     
