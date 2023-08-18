@@ -62,9 +62,14 @@ const toModulePlugin = (...args) => {
 };
 
 export const plugins = {
+    //chumano
     GlobeViewSwitcherPlugin: toModulePlugin(
         'GlobeViewSwitcher',
         () => import(/* webpackChunkName: 'plugins/globe-view-switcher' */ '@mapstore/framework/plugins/GlobeViewSwitcher')
+    ),
+    CRSSelector: toModulePlugin(
+        'CRSSelector',
+        () => import(/* webpackChunkName: 'plugins/globe-view-switcher' */ '@mapstore/framework/plugins/CRSSelector')
     ),
     LayerDownloadPlugin: toModulePlugin(
         'LayerDownload',
