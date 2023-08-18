@@ -410,7 +410,7 @@ export function cleanStyles(styles = [], excluded = []) {
 export function getGeoNodeMapLayers(data) {
     return (data?.map?.layers || [])
         .filter(layer => layer?.extendedParams?.mapLayer)
-        .map((layer) => {
+        .map((layer, index) => {
             return {
                 ...(layer?.extendedParams?.mapLayer && {
                     pk: layer.extendedParams.mapLayer.pk
@@ -421,7 +421,10 @@ export function getGeoNodeMapLayers(data) {
                         .map(({ canEdit, metadata, ...style }) => ({ ...style }))
                 },
                 current_style: layer.style || '',
-                name: layer.name
+                name: layer.name,
+                order: index,
+                opacity: layer.opacity ?? 1,
+                visibility: layer.visibility
             };
         });
 }
@@ -702,4 +705,8 @@ export const parseUploadFiles = (data) => {
 
 export const getResourceImageSource = (image) => {
     return image ? image : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADICAIAAABZHvsFAAAACXBIWXMAAC4jAAAuIwF4pT92AAABiklEQVR42u3SAQ0AAAjDMMC/5+MAAaSVsKyTFHwxEmBoMDQYGgyNocHQYGgwNBgaQ4OhwdBgaDA0hgZDg6HB0GBoDA2GBkODocHQGBoMDYYGQ4OhMTQYGgwNhgZDY2gwNBgaDI2hwdBgaDA0GBpDg6HB0GBoMDSGBkODocHQYGgMDYYGQ4OhwdAYGgwNhgZDg6ExNBgaDA2GBkNjaDA0GBoMDYbG0GBoMDQYGkODocHQYGgwNIYGQ4OhwdBgaAwNhgZDg6HB0BgaDA2GBkODoTE0GBoMDYYGQ2NoMDQYGgwNhsbQYGgwNBgaQ4OhwdBgaDA0hgZDg6HB0GBoDA2GBkODocHQGBoMDYYGQ4OhMTQYGgwNhgZDY2gwNBgaDA2GxtBgaDA0GBoMjaHB0GBoMDSGBkODocHQYGgMDYYGQ4OhwdAYGgwNhgZDg6ExNBgaDA2GBkNjaDA0GBoMDYbG0GBoMDQYGgyNocHQYGgwNIYGQ4OhwdBgaAwNhgZDg6HB0BgaDA2GBkPDbQH4OQSN0W8qegAAAABJRU5ErkJggg==';
+};
+
+export const isDocumentExternalSource = (resource) => {
+    return resource && resource.resource_type === ResourceTypes.DOCUMENT && resource.sourcetype === 'REMOTE';
 };
