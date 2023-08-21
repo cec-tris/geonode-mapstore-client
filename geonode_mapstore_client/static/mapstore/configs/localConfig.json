@@ -589,15 +589,6 @@
                         },
                         {
                             "type": "plugin",
-                            "name": "DeleteResource",
-                            "disableIf": "{!context.resourceHasPermission(state('gnResourceData'), 'delete_resourcebase')}"
-                        },
-                        {
-                            "type": "divider",
-                            "authenticated": true
-                        },
-                        {
-                            "type": "plugin",
                             "name": "Print"
                         },
                         {
@@ -606,7 +597,7 @@
                         },
                         {
                             "labelId": "gnviewer.download",
-                            "disablePluginIf": "{!state('selectedLayerPermissions').includes('download_resourcebase')}",
+                            "disableIf": "{!state('selectedLayerPermissions').includes('download_resourcebase') || context.isDocumentExternalSource(state('gnResourceData'))}",
                             "type": "dropdown",
                             "items": [
                                 {
@@ -634,6 +625,11 @@
                             "href": "{'#/map/new?gn-dataset=' + (state('gnResourceData') || {}).pk}",
                             "labelId": "gnviewer.createMap",
                             "disableIf": "{!(state('user') && state('user').perms && state('user').perms.includes('add_resource'))}"
+                        },
+                        {
+                            "type": "plugin",
+                            "name": "DeleteResource",
+                            "disableIf": "{!context.resourceHasPermission(state('gnResourceData'), 'delete_resourcebase')}"
                         }
                     ],
                     "rightMenuItems": [
@@ -714,6 +710,12 @@
                                     "query": {
                                         "f": "{context.get(state('gnResourceData'), 'resource_type')}"
                                     }
+                                },
+                                {
+                                    "type": "{context.isDocumentExternalSource(state('gnResourceData')) ? 'link' : 'text'}",
+                                    "labelId": "gnviewer.sourceType",
+                                    "value": "{context.get(state('gnResourceData'), 'sourcetype', '').toLowerCase()}",
+                                    "href": "{context.get(state('gnResourceData'), 'href')}"
                                 },
                                 {
                                     "type": "query",
@@ -801,6 +803,9 @@
             },
             {
                 "name": "DeleteResource"
+            },
+            {
+                "name": "DownloadResource"
             },
             {
                 "name": "Map",
@@ -1520,15 +1525,6 @@
                         },
                         {
                             "type": "plugin",
-                            "name": "DeleteResource",
-                            "disableIf": "{!context.resourceHasPermission(state('gnResourceData'), 'delete_resourcebase')}"
-                        },
-                        {
-                            "type": "divider",
-                            "authenticated": true
-                        },
-                        {
-                            "type": "plugin",
                             "name": "Print"
                         },
                         {
@@ -1544,6 +1540,11 @@
                             "type": "plugin",
                             "name": "DatasetsCatalog",
                             "disableIf": "{!context.resourceHasPermission(state('gnResourceData'), 'change_resourcebase') && !state('isNewResource')}"
+                        },
+                        {
+                            "type": "plugin",
+                            "name": "DeleteResource",
+                            "disableIf": "{!context.resourceHasPermission(state('gnResourceData'), 'delete_resourcebase')}"
                         }
                     ],
                     "rightMenuItems": [
@@ -1605,6 +1606,12 @@
                                     "query": {
                                         "f": "{context.get(state('gnResourceData'), 'resource_type')}"
                                     }
+                                },
+                                {
+                                    "type": "{context.isDocumentExternalSource(state('gnResourceData')) ? 'link' : 'text'}",
+                                    "labelId": "gnviewer.sourceType",
+                                    "value": "{context.get(state('gnResourceData'), 'sourcetype', '').toLowerCase()}",
+                                    "href": "{context.get(state('gnResourceData'), 'href')}"
                                 },
                                 {
                                     "type": "query",
@@ -2253,6 +2260,12 @@
                                     }
                                 },
                                 {
+                                    "type": "{context.isDocumentExternalSource(state('gnResourceData')) ? 'link' : 'text'}",
+                                    "labelId": "gnviewer.sourceType",
+                                    "value": "{context.get(state('gnResourceData'), 'sourcetype', '').toLowerCase()}",
+                                    "href": "{context.get(state('gnResourceData'), 'href')}"
+                                },
+                                {
                                     "type": "query",
                                     "labelId": "gnviewer.category",
                                     "value": "{context.get(state('gnResourceData'), 'category.identifier')}",
@@ -2563,6 +2576,12 @@
                                     }
                                 },
                                 {
+                                    "type": "{context.isDocumentExternalSource(state('gnResourceData')) ? 'link' : 'text'}",
+                                    "labelId": "gnviewer.sourceType",
+                                    "value": "{context.get(state('gnResourceData'), 'sourcetype', '').toLowerCase()}",
+                                    "href": "{context.get(state('gnResourceData'), 'href')}"
+                                },
+                                {
                                     "type": "query",
                                     "labelId": "gnviewer.category",
                                     "value": "{context.get(state('gnResourceData'), 'category.identifier')}",
@@ -2789,6 +2808,12 @@
                                     "query": {
                                         "f": "{context.get(state('gnResourceData'), 'resource_type')}"
                                     }
+                                },
+                                {
+                                    "type": "{context.isDocumentExternalSource(state('gnResourceData')) ? 'link' : 'text'}",
+                                    "labelId": "gnviewer.sourceType",
+                                    "value": "{context.get(state('gnResourceData'), 'sourcetype', '').toLowerCase()}",
+                                    "href": "{context.get(state('gnResourceData'), 'href')}"
                                 },
                                 {
                                     "type": "query",
@@ -3311,6 +3336,12 @@
                                     "query": {
                                         "f": "{context.get(state('gnResourceData'), 'resource_type')}"
                                     }
+                                },
+                                {
+                                    "type": "{context.isDocumentExternalSource(state('gnResourceData')) ? 'link' : 'text'}",
+                                    "labelId": "gnviewer.sourceType",
+                                    "value": "{context.get(state('gnResourceData'), 'sourcetype', '').toLowerCase()}",
+                                    "href": "{context.get(state('gnResourceData'), 'href')}"
                                 },
                                 {
                                     "type": "query",

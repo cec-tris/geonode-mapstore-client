@@ -26,7 +26,8 @@ import {
     parseUploadFiles,
     getResourceTypesInfo,
     ResourceTypes,
-    FEATURE_INFO_FORMAT
+    FEATURE_INFO_FORMAT,
+    isDocumentExternalSource
 } from '../ResourceUtils';
 
 describe('Test Resource Utils', () => {
@@ -116,7 +117,9 @@ describe('Test Resource Utils', () => {
                             mapLayer: {
                                 pk: 10
                             }
-                        }
+                        },
+                        opacity: 0.5,
+                        visibility: false
                     }
                 ]
             }
@@ -130,7 +133,10 @@ describe('Test Resource Utils', () => {
                 styles: [{ name: 'custom:style', title: 'My Style', format: 'css' }]
             },
             current_style: 'geonode:style',
-            name: 'geonode:layer'
+            name: 'geonode:layer',
+            opacity: 0.5,
+            visibility: false,
+            order: 0
         });
     });
     it('should convert data blob to geonode map properties', () => {
@@ -969,5 +975,17 @@ describe('Test Resource Utils', () => {
             expect(name).toBe('Dashboard');
             expect(formatMetadataUrl(resource)).toBe('/apps/100/metadata');
         });
+    });
+    it('isDocumentExternalSource', () => {
+        let resource = { resource_type: "document", sourcetype: "REMOTE" };
+        expect(isDocumentExternalSource(resource)).toBeTruthy();
+
+        // LOCAL
+        resource = {...resource, sourcetype: "LOCAL"};
+        expect(isDocumentExternalSource(resource)).toBeFalsy();
+
+        // NOT DOCUMENT
+        resource = {...resource, resource_type: "dataset"};
+        expect(isDocumentExternalSource(resource)).toBeFalsy();
     });
 });
