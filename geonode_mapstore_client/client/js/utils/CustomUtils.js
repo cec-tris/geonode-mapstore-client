@@ -1,45 +1,9 @@
-import axios from '@mapstore/framework/libs/ajax';
 import {API} from '@mapstore/framework/api/searchText';
+import DataHubAPI from '@js/api/geonode/datahub/index';
 
-function getIcons(search, page=1, limit = 10){
-    if(!search){
-        search =''
-    }
-    const geoNodePageConfig = window.__GEONODE_CONFIG__ //||  {baseUrl:'http://192.168.1.30:8003/' };
-    const {baseUrl} = geoNodePageConfig;
-    const url = `${baseUrl}icons/?format=json&search=${search}&page=${page}&limit=${limit}`
-    return axios.get(url, {
-        headers: {
-            'Content-Type': "application/json"
-        }
-    }).then(function(response) {
-        return response.data;
-    });
-}
-function wait(milliseconds){
-    return new Promise(resolve => {
-        setTimeout(resolve, milliseconds);
-    });
-}
-
-async function getExternalData(dataId){
-    const geoNodePageConfig = window.__GEONODE_CONFIG__ //||  {baseUrl:'http://192.168.1.30:8003/' };
-    const {baseUrl} = geoNodePageConfig;
-    const url = `${baseUrl}datahub/data/${dataId}`
-    await wait(1000)
-    return axios.get(url, {
-        headers: {
-            'Content-Type': "application/json"
-        }
-    }).then(function(response) {
-        console.log("chumano getExternalData", response)
-        const responseData = response.data;
-        return responseData;
-    });
-    
-}
 
 export function initAppCustom(){
-    API.Utils.setService("GET_ICONS_API", getIcons)
-    API.Utils.setService("GET_EXTERNAL_DATA_API", getExternalData)
+    API.Utils.setService("GET_ICONS_API", DataHubAPI.getIcons)
+    API.Utils.setService("GET_EXTERNAL_DATA_API", DataHubAPI.getExternalData)
+    API.Utils.setService("CUSTOM_GEOCODE", DataHubAPI.geocode)
 }

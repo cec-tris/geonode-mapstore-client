@@ -1185,14 +1185,6 @@
             },
             {
                 "name": "Legend"
-            },
-            {
-                "name" :"GlobeViewSwitcher",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
             }
         ],
         "dataset_edit_data_viewer": [
@@ -2032,9 +2024,6 @@
                         "min-width: 768px"
                     ]
                 }
-            },
-            {
-                "name": "SearchServicesConfig"
             },
             {
                 "name": "FullScreen",

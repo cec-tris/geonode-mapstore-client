@@ -58,6 +58,7 @@ def resource_urls(request):
                     dict()).get(
                         'MOSAIC_ENABLED',
                         False),
-        'SUPPORTED_DATASET_FILE_TYPES': get_supported_datasets_file_types()
+        'SUPPORTED_DATASET_FILE_TYPES': get_supported_datasets_file_types(),
+        'USE_CUSTOM_GEOCCODE' : getattr(settings, "USE_CUSTOM_GEOCCODE", True),
     }
     return defaults

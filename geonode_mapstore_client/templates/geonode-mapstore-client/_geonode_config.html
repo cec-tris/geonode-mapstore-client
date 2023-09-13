@@ -40,6 +40,7 @@
 
         const cardsMenuItems = getJSONScriptVariable('menu-CARDS_MENU', []);
         const geoNodeSettings = getJSONScriptVariable('GEONODE_SETTINGS', {});
+        const useCustomGeocode =  geoNodeSettings.USE_CUSTOM_GEOCCODE || false;
 
         const baseLayers = geoNodeSettings.MAP_BASELAYERS || [];
         const baseLayersSources = geoNodeSettings.MAP_BASELAYERS_SOURCES || {};
@@ -133,6 +134,7 @@
             pluginsConfigPatchRules: pluginsConfigPatchRules,
             apikey: '{%if user_apikey %}{{user_apikey}}{% else %}{% endif %}',
             baseUrl: '{{ SITEURL }}' || 'http://localhost/',
+            useCustomGeocode: useCustomGeocode, 
             localConfig: {
                 proxyUrl: proxyUrl,
                 useAuthenticationRules: true,
@@ -191,6 +193,7 @@
 
         // override maps configuration with properties from setting.py
         window.overrideNewMapConfig = function(config) {
+            console.log("overrideNewMapConfig" ,{config})
             if (config && config.map && config.map.layers) {
                 config.map.layers.push(...baseLayers);
             }
@@ -219,9 +222,11 @@
     })();
 </script>
 {% block override_local_config %}
-{% comment %}
+
 <script>
     window.__GEONODE_CONFIG__.overrideLocalConfig = function(localConfig, _) {
+        customLocalConfig(localConfig);
+        return localConfig;
         /*
         _ is a subset of lodash and contains following functions
         {
@@ -247,6 +252,64 @@
             }
         });
     };
+
+    //chumano customLocalConfig
+    function customLocalConfig(localConfig){
+        const {useCustomGeocode} = window.__GEONODE_CONFIG__;
+        Object.keys(localConfig.plugins).forEach((pageName) => {
+            localConfig.plugins[pageName].forEach((plugin) => {
+                if (plugin.name =='Search' && plugin.cfg ) {
+                    plugin.cfg.showCoordinatesSearchOption = false;
+                    plugin.cfg.showRouteSearchOption = false;
+                    if(useCustomGeocode){
+                        plugin.cfg.maxResults = 5;
+                        plugin.cfg.searchOptions = {
+                            "services": [
+                                {"type": "CUSTOM_GEOCODE", "priority": 10}
+                                //{"type": "nominatim", "priority": 10}
+                            ]
+                        }
+                    }
+                }
+            });
+        });
+        
+        const useSearchConfig = false;
+        if(useSearchConfig){
+            const pages =['map_viewer']
+            Object.keys(localConfig.plugins).forEach((pageName) => {
+                if(pages.includes(pageName)){
+                   const pluginsInPage = localConfig.plugins[pageName] 
+                   localConfig.plugins[pageName] = [
+                    ...pluginsInPage,
+                    {
+                        "name": "SearchServicesConfig"
+                    }
+                   ]
+                }
+            });
+        }
+        const useGlobeConfig = true;
+        if(useGlobeConfig){
+            const pages =['map_viewer']
+            Object.keys(localConfig.plugins).forEach((pageName) => {
+                if(pages.includes(pageName)){
+                   const pluginsInPage = localConfig.plugins[pageName] 
+                   localConfig.plugins[pageName] = [
+                    ...pluginsInPage,
+                    {
+                        "name" :"GlobeViewSwitcher",
+                        "override": {
+                            "Toolbar": {
+                                "alwaysVisible": true
+                            }
+                        }
+                    }
+                   ]
+                }
+            });
+        }
+            
+    }
 </script>
-{% endcomment %}
 {% endblock %}
