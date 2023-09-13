@@ -189,7 +189,6 @@
 
         // override maps configuration with properties from setting.py
         window.overrideNewMapConfig = function(config) {
-            console.log("overrideNewMapConfig" ,{config})
             if (config && config.map && config.map.layers) {
                 config.map.layers.push(...baseLayers);
             }

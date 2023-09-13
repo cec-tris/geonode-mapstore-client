@@ -750,6 +750,7 @@
             "changeSearchInputField": "Change the search tool",
             "addressSearch": "Search by location name",
             "coordinatesSearch": "Search by coordinates",
+            "routeSearch": "Search a route",
             "searchservicesbutton": "Configure search services",
             "configpaneltitle": "Create/edit a search service",
             "serviceslistlabel": "Available services",
