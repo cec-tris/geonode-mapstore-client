@@ -723,7 +723,7 @@
                                     "value": "{context.get(state('gnResourceData'), 'category.identifier')}",
                                     "pathname": "/",
                                     "query": {
-                                        "filter{category.identifier.in}": "{context.get(state('gnResourceData'), 'category.identifier')}"
+                                        "filter{category.identifier}": "{context.get(state('gnResourceData'), 'category.identifier')}"
                                     }
                                 },
                                 {
@@ -749,7 +749,7 @@
                                     "valueKey": "name",
                                     "pathname": "/",
                                     "queryTemplate": {
-                                        "filter{regions.name.in}": "${name}"
+                                        "filter{regions.code.in}": "${code}"
                                     }
                                 },
                                 {
@@ -1611,7 +1611,7 @@
                                     "value": "{context.get(state('gnResourceData'), 'category.identifier')}",
                                     "pathname": "/",
                                     "query": {
-                                        "filter{category.identifier.in}": "{context.get(state('gnResourceData'), 'category.identifier')}"
+                                        "filter{category.identifier}": "{context.get(state('gnResourceData'), 'category.identifier')}"
                                     }
                                 },
                                 {
@@ -1634,10 +1634,10 @@
                                     "type": "query",
                                     "labelId": "gnviewer.regions",
                                     "value": "{context.get(state('gnResourceData'), 'regions')}",
-                                    "valueKey": "name",
+                                    "valueKey": "code",
                                     "pathname": "/",
                                     "queryTemplate": {
-                                        "filter{regions.name.in}": "${name}"
+                                        "filter{regions.code.in}": "${code}"
                                     }
                                 },
                                 {
@@ -2260,7 +2260,7 @@
                                     "value": "{context.get(state('gnResourceData'), 'category.identifier')}",
                                     "pathname": "/",
                                     "query": {
-                                        "filter{category.identifier.in}": "{context.get(state('gnResourceData'), 'category.identifier')}"
+                                        "filter{category.identifier}": "{context.get(state('gnResourceData'), 'category.identifier')}"
                                     }
                                 },
                                 {
@@ -2286,7 +2286,7 @@
                                     "valueKey": "name",
                                     "pathname": "/",
                                     "queryTemplate": {
-                                        "filter{regions.name.in}": "${name}"
+                                        "filter{regions.code.in}": "${code}"
                                     }
                                 },
                                 {
@@ -2576,7 +2576,7 @@
                                     "value": "{context.get(state('gnResourceData'), 'category.identifier')}",
                                     "pathname": "/",
                                     "query": {
-                                        "filter{category.identifier.in}": "{context.get(state('gnResourceData'), 'category.identifier')}"
+                                        "filter{category.identifier}": "{context.get(state('gnResourceData'), 'category.identifier')}"
                                     }
                                 },
                                 {
@@ -2602,7 +2602,7 @@
                                     "valueKey": "name",
                                     "pathname": "/",
                                     "queryTemplate": {
-                                        "filter{regions.name.in}": "${name}"
+                                        "filter{regions.code.in}": "${code}"
                                     }
                                 },
                                 {
@@ -2810,7 +2810,7 @@
                                     "value": "{context.get(state('gnResourceData'), 'category.identifier')}",
                                     "pathname": "/",
                                     "query": {
-                                        "filter{category.identifier.in}": "{context.get(state('gnResourceData'), 'category.identifier')}"
+                                        "filter{category.identifier}": "{context.get(state('gnResourceData'), 'category.identifier')}"
                                     }
                                 },
                                 {
@@ -2836,7 +2836,7 @@
                                     "valueKey": "name",
                                     "pathname": "/",
                                     "queryTemplate": {
-                                        "filter{regions.name.in}": "${name}"
+                                        "filter{regions.code.in}": "${code}"
                                     }
                                 },
                                 {
@@ -3338,7 +3338,7 @@
                                     "value": "{context.get(state('gnResourceData'), 'category.identifier')}",
                                     "pathname": "/",
                                     "query": {
-                                        "filter{category.identifier.in}": "{context.get(state('gnResourceData'), 'category.identifier')}"
+                                        "filter{category.identifier}": "{context.get(state('gnResourceData'), 'category.identifier')}"
                                     }
                                 },
                                 {
@@ -3364,7 +3364,7 @@
                                     "valueKey": "name",
                                     "pathname": "/",
                                     "queryTemplate": {
-                                        "filter{regions.name.in}": "${name}"
+                                        "filter{regions.code.in}": "${code}"
                                     }
                                 },
                                 {
