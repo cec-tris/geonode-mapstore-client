@@ -22,17 +22,16 @@ function wait(milliseconds){
     });
 }
 
-async function getExternalData(dataId){
+async function getExternalDataHub(dataId){
     const geoNodePageConfig = window.__GEONODE_CONFIG__ //||  {baseUrl:'http://192.168.1.30:8003/' };
     const {baseUrl} = geoNodePageConfig;
     const url = `${baseUrl}datahub/data/${dataId}`
-    await wait(1000)
+    //await wait(1000)
     return axios.get(url, {
         headers: {
             'Content-Type': "application/json"
         }
     }).then(function(response) {
-        console.log("chumano getExternalData", response)
         const responseData = response.data;
         return responseData;
     });
@@ -41,5 +40,5 @@ async function getExternalData(dataId){
 
 export function initAppCustom(){
     API.Utils.setService("GET_ICONS_API", getIcons)
-    API.Utils.setService("GET_EXTERNAL_DATA_API", getExternalData)
+    API.Utils.setService("GET_DATAHUB_API", getExternalDataHub)
 }

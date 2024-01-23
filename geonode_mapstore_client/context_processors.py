@@ -58,6 +58,8 @@ def resource_urls(request):
                     dict()).get(
                         'MOSAIC_ENABLED',
                         False),
-        'SUPPORTED_DATASET_FILE_TYPES': get_supported_datasets_file_types()
+        'SUPPORTED_DATASET_FILE_TYPES': get_supported_datasets_file_types(),
+        'DATAHUB_ENABLED':  getattr(settings, "DATAHUB_ENABLED", False),
+        'DATAHUB_ID_FIELD':  getattr(settings, "DATAHUB_ID_FIELD", 'datahubid'),
     }
     return defaults

@@ -41,6 +41,9 @@
         const cardsMenuItems = getJSONScriptVariable('menu-CARDS_MENU', []);
         const geoNodeSettings = getJSONScriptVariable('GEONODE_SETTINGS', {});
 
+        const dataHubEnabled = geoNodeSettings.DATAHUB_ENABLED === 'True' ? true : false
+        const dataHubField = geoNodeSettings.DATAHUB_ID_FIELD;
+
         const baseLayers = geoNodeSettings.MAP_BASELAYERS || [];
         const baseLayersSources = geoNodeSettings.MAP_BASELAYERS_SOURCES || {};
         const defaultMapCRS = geoNodeSettings.DEFAULT_MAP_CRS || 'EPSG:3857';
@@ -123,6 +126,7 @@
             useCORS: []
         }: undefined;
         window.__GEONODE_CONFIG__ = {
+            dataHubEnabled, dataHubField,
             languageCode: '{{ LANGUAGE_CODE }}',
             languages: languages,
             translationsPath: translationsPath,

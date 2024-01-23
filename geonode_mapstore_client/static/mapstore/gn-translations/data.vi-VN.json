@@ -194,7 +194,7 @@
             "embed": "Nhúng",
             "deleteResourceTitle": "{count, plural, =1 {Bạn có chắc muốn xóa dữ liệu này không?} other {Bạn có chắc muốn xóa những dữ liệu này không?}}",
             "deleteResourceNo": "{count, plural, =1 {Không, đừng xóa} other {Không, đừng xóa}}",
-            "deleteResourceYes": "Vâng, Tôi các chắn",
+            "deleteResourceYes": "Vâng, Tôi chắc chắn",
             "notApproved": "Không được xác nhận",
             "unpublish": "Hủy công bố",
             "deleted": "Đã xóa",
