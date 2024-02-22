@@ -42,11 +42,12 @@
                 {% endblock %}
             </div>
             <div class="gn-menu-content-center">
-                {% if not show_search_bar and show_search_bar != False or show_search_bar == True %}
+                {% if False and not show_search_bar and show_search_bar != False or show_search_bar == True %}
                     {% block center_menu %}
                         {% include './search_bar.html' with search_bar_id='gn-search-bar' %}
                     {% endblock %}
                 {% endif %}
+                <h3>Sở Thông tin và Truyền thông tỉnh Thái Nguyên</h3>
             </div>
             <div class="gn-menu-content-right">
                 {% block right_menu %}
