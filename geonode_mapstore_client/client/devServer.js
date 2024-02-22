@@ -8,7 +8,7 @@ module.exports = (devServerDefault, projectConfig) => {
 
     const appDirectory = projectConfig.appDirectory;
     const devServerHost = envConfig.DEV_SERVER_HOSTNAME || 'localhost';
-    const proxyTargetHost = envConfig.DEV_TARGET_GEONODE_HOST || 'localhost:8000';
+    const proxyTargetHost = envConfig.DEV_TARGET_GEONODE_HOST || 'localhost'; //[CHUNO] old: localhost:8000, new: localhost
     const protocol = envConfig.DEV_SERVER_PROTOCOL || 'http';
 
     const proxyTargetURL = `${protocol}://${proxyTargetHost}`;
