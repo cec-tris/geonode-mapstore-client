@@ -251,11 +251,11 @@ def get_user_menu(context):
         ]
     # [chumano] hide admin,geoserver  link
     admin_only = [
-        # {
-        #     "type": "link",
-        #     "href": "/admin/",
-        #     "label": "Admin"
-        # },
+        {
+            "type": "link",
+            "href": "/admin/",
+            "label": "Admin"
+        },
         # {
         #     "type": "link",
         #     "href": "/geoserver/",
